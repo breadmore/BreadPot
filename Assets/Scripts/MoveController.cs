@@ -8,8 +8,8 @@ public class MoveController : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     private bool isMoving = false; // 이동 중인지 여부를 나타내는 변수
-    private List<Vector2Int> currentPath;
-    private int currentPathIndex;
+    private List<Vector2Int> currentPath; // 이동 경로를 담은 리스트
+    private int currentPathIndex; // 현재 이동중인 경로 인덱스
 
     private void Start()
     {
@@ -24,25 +24,15 @@ public class MoveController : MonoBehaviour
             // 클릭된 위치가 Tilemap 내에 있는지 확인 및 타일이 설치된 위치인지 확인
             if (IsTileInstalledAtPosition(clickPosition))
             {
-                //내 위치
+                // 내 위치
                 Vector3Int startPlayerPosition = tilemap.WorldToCell(transform.position);
                 Vector3Int goalPlayerPosition = tilemap.WorldToCell(clickPosition);
 
-                // 그리드의 시작 위치를 나타내는 값
-                int gridStartX = tilemap.cellBounds.x;
-                int gridStartY = tilemap.cellBounds.y;
+                // Vector2Int 형태로 변환함
+                Vector2Int startCellPosition = new Vector2Int(startPlayerPosition.x, startPlayerPosition.y);
+                Vector2Int goalCellPosition = new Vector2Int(goalPlayerPosition.x, goalPlayerPosition.y);
 
-                // 플레이어의 위치를 그리드 기준으로 변환
-                int playerGridX = startPlayerPosition.x - gridStartX;
-                int playerGridY = startPlayerPosition.y - gridStartY;
 
-                int goalGridX = goalPlayerPosition.x - gridStartX;
-                int goalGridY = goalPlayerPosition.y - gridStartY;
-
-                Vector2Int startCellPosition = new Vector2Int(playerGridX, playerGridY);
-                Vector2Int goalCellPosition = new Vector2Int(goalGridX, goalGridY);
-
-//                print(goalCellPosition);
                 if (startCellPosition == goalCellPosition)
                     return;
 
@@ -56,16 +46,20 @@ public class MoveController : MonoBehaviour
                     }
                 }
 
+                //BoundsInt cellBounds = tilemap.cellBounds;
+
+                //int startX = cellBounds.x;
+                //int startY = cellBounds.y;
+                //int endX = cellBounds.x + cellBounds.size.x;
+                //int endY = cellBounds.y + cellBounds.size.y;
+
+                //Debug.Log("Grid Cell Range: X(" + startX + " to " + endX + "), Y(" + startY + " to " + endY + ")");
+
                 currentPath = AStar.FindPath(nodeGrid, startCellPosition, goalCellPosition);
-                Vector2Int targetGridPosition = currentPath[currentPathIndex];
-
-                Vector3 targetPosition = CellToWorld(new Vector3Int(0,0,0));
-
-                print(targetPosition);
                 if (currentPath.Count > 0)
                 {
                     currentPathIndex = 0;
-                    //StartCoroutine(FollowPath());
+                    StartCoroutine(FollowPath());
 
 
                 }
@@ -83,12 +77,11 @@ public class MoveController : MonoBehaviour
 
             Vector3 targetPosition = tilemap.GetCellCenterWorld(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0));
 
-            print(targetPosition);
-            //while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
-            //{
-            //    transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            //    yield return null;
-            //}
+            while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
 
             currentPathIndex++;
             yield return null;
