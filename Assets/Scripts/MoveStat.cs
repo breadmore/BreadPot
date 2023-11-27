@@ -27,6 +27,7 @@ public class MoveStat : MonoBehaviour
         if (randomValue <= moveStat / 100.0f)
         {
             image.sprite = successSprite;
+            GameManager.instance.canMoveCount++;
         }
         else
         {

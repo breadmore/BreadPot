@@ -4,18 +4,22 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public class MoveController : MonoBehaviour
 {
+    public GameObject nowTurnPlayer;
+
     public Tilemap tilemap;
     public float moveSpeed = 5.0f;
 
     private bool isMoving = false; // 이동 중인지 여부를 나타내는 변수
     private List<Vector2Int> currentPath; // 이동 경로를 담은 리스트
     private int currentPathIndex; // 현재 이동중인 경로 인덱스
+    public TileBase Water;
 
-    private void Start()
-    {
-    }
     private void Update()
     {
+        if(nowTurnPlayer == null)
+        {
+            return;
+        }
         // 이동 중이 아닐 때만 클릭 이벤트 처리
         if (!GameManager.instance.onUI && !isMoving && Input.GetMouseButtonDown(0))
         {
@@ -25,7 +29,7 @@ public class MoveController : MonoBehaviour
             if (IsTileInstalledAtPosition(clickPosition))
             {
                 // 내 위치
-                Vector3Int startPlayerPosition = tilemap.WorldToCell(transform.position);
+                Vector3Int startPlayerPosition = tilemap.WorldToCell(nowTurnPlayer.transform.position);
                 Vector3Int goalPlayerPosition = tilemap.WorldToCell(clickPosition);
 
                 // Vector2Int 형태로 변환함
@@ -36,26 +40,13 @@ public class MoveController : MonoBehaviour
                 if (startCellPosition == goalCellPosition)
                     return;
 
-                int[,] grid = TilemapToGrid(tilemap);
-                Node[,] nodeGrid = new Node[grid.GetLength(0), grid.GetLength(1)];
-                for (int x = 0; x < grid.GetLength(0); x++)
-                {
-                    for (int y = 0; y < grid.GetLength(1); y++)
-                    {
-                        nodeGrid[x, y] = new Node(new Vector2Int(x, y), grid[x, y] == 1);
-                    }
-                }
+                Node[,] grid = TilemapToNodeGrid(tilemap);
 
-                //BoundsInt cellBounds = tilemap.cellBounds;
+                TileBase clickedTile = tilemap.GetTile(goalPlayerPosition);
+                Debug.Log($"Clicked Tile: {clickedTile}");
 
-                //int startX = cellBounds.x;
-                //int startY = cellBounds.y;
-                //int endX = cellBounds.x + cellBounds.size.x;
-                //int endY = cellBounds.y + cellBounds.size.y;
 
-                //Debug.Log("Grid Cell Range: X(" + startX + " to " + endX + "), Y(" + startY + " to " + endY + ")");
-
-                currentPath = AStar.FindPath(nodeGrid, startCellPosition, goalCellPosition);
+                currentPath = AStar.FindPath(grid, startCellPosition, goalCellPosition);
                 if (currentPath.Count > 0)
                 {
                     currentPathIndex = 0;
@@ -70,19 +61,21 @@ public class MoveController : MonoBehaviour
     private IEnumerator FollowPath()
     {
         isMoving = true;
-        while (currentPathIndex < currentPath.Count)
-        {
 
+        // 경로 인덱스를 전부 탐색했거나 이동가능 횟수를 다 쓸떄까지 반복
+        while (currentPathIndex < currentPath.Count && GameManager.instance.canMoveCount>=0)
+        {
             Vector2Int targetGridPosition = currentPath[currentPathIndex];
 
             Vector3 targetPosition = tilemap.GetCellCenterWorld(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0));
 
-            while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
+            while (Vector2.Distance(nowTurnPlayer.transform.position, targetPosition) > 0.1f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                nowTurnPlayer.transform.position = Vector2.MoveTowards(nowTurnPlayer.transform.position, targetPosition, moveSpeed * Time.deltaTime);
                 yield return null;
             }
 
+            GameManager.instance.canMoveCount--;
             currentPathIndex++;
             yield return null;
         }
@@ -99,25 +92,29 @@ public class MoveController : MonoBehaviour
         return tile != null;
     }
 
-    
 
-    private int[,] TilemapToGrid(Tilemap tilemap)
+
+    private Node[,] TilemapToNodeGrid(Tilemap tilemap)
     {
         BoundsInt bounds = tilemap.cellBounds;
 
-        int[,] grid = new int[bounds.size.x, bounds.size.y];
+        Node[,] nodeGrid = new Node[bounds.size.x, bounds.size.y];
 
         for (int x = 0; x < bounds.size.x; x++)
         {
             for (int y = 0; y < bounds.size.y; y++)
             {
-                Vector3Int cellPosition = new Vector3Int(x + bounds.x, y + bounds.y);
+                Vector3Int cellPosition = new Vector3Int(x, y);
+
                 TileBase tile = tilemap.GetTile(cellPosition);
-                grid[x, y] = (tile != null) ? 1 : 0;
+                bool isWalkable = (tile != null && tile != Water);
+
+                //print("검사중인 셀 포지션 " + cellPosition + "? : " +isWalkable);
+                nodeGrid[x, y] = new Node(new Vector2Int(x, y), isWalkable);
             }
         }
 
-        return grid;
+        return nodeGrid;
     }
 
     public Vector3 CellToWorld(Vector3Int cellPosition)

@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : SingletonDontDestroy<CharacterManager>
+public class CharacterManager : Singleton<CharacterManager>
 {
-    
+    private MoveController moveController;
     public List<GameObject> players = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        
+        moveController = GetComponent<MoveController>();
+        CameraFollow.instance.SetPlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetPlayerTurn(int currentPlayerIndex)
+    {
+        moveController.nowTurnPlayer = players[currentPlayerIndex];
     }
 
     public void StartBattleScene()

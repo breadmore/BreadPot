@@ -39,15 +39,6 @@ public class AStar
         {
             Node currentNode = openSet[0];
 
-            // 비용이 낮은 경로로 대체
-            for (int i = 1; i < openSet.Count; i++)
-            {
-                if (openSet[i].fCost < currentNode.fCost || (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
-                {
-                    currentNode = openSet[i];
-                }
-            }
-
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
@@ -62,7 +53,7 @@ public class AStar
             {
                 if (!closedSet.Contains(neighbor))
                 {
-                    int newCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
+                    int newCostToNeighbor = currentNode.gCost +1;
                     if (newCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                     {
                         neighbor.gCost = newCostToNeighbor;
@@ -98,26 +89,40 @@ public class AStar
     // 비용 계산 모든 비용 동일
     static int GetDistance(Node nodeA, Node nodeB)
     {
-        int dstX = Mathf.Abs(nodeA.position.x - nodeB.position.x);
-        int dstY = Mathf.Abs(nodeA.position.y - nodeB.position.y);
+        int dx = Mathf.Abs(nodeA.position.x - nodeB.position.x);
+        int dy = Mathf.Abs(nodeA.position.y - nodeB.position.y);
 
-        return dstX + dstY;
+        // 대각선 이동에 대한 추가 비용 부여
+        int diagonalCost = 14; // 대각선 이동 비용
+        int straightCost = 10; // 직선 이동 비용
+
+        return straightCost * (dx + dy) + (diagonalCost - 2 * straightCost) * Mathf.Min(dx, dy);
     }
 
     static List<Node> GetNeighbors(Node[,] grid, Node node)
     {
         List<Node> neighbors = new List<Node>();
-        int[,] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
+
+        int[,] directions;
+
+        if (node.position.y % 2 == 0)
+        {
+            directions = new int[,] { { 0, -1 }, { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }, { -1, -1 } };
+        }
+        else
+        {
+            directions = new int[,] { { 0, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } };
+        }
 
         for (int i = 0; i < directions.GetLength(0); i++)
         {
             int[] dir = { directions[i, 0], directions[i, 1] };
             Vector2Int neighborPos = node.position + new Vector2Int(dir[0], dir[1]);
-            //Debug.Log("pos : " + neighborPos);
+
             if (neighborPos.x >= 0 && neighborPos.x < grid.GetLength(0) &&
-                neighborPos.y >=0 && neighborPos.y < grid.GetLength(1))
+                neighborPos.y >= 0 && neighborPos.y < grid.GetLength(1))
             {
-                //Debug.Log(neighborPos);
+               if(grid[neighborPos.x,neighborPos.y].isWalkable)
                 neighbors.Add(grid[neighborPos.x, neighborPos.y]);
             }
         }
