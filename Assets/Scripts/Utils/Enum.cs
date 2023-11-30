@@ -10,6 +10,8 @@ public enum Test
 
 public static class Consts
 {
+    public const int MAX_NUMBER_PARTY = 4;
+
     public const int DELETE_ENEMY_TIME = 5;
     public const int REFRESH_MAP_TIME = 1;
 

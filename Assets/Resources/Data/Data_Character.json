@@ -1,0 +1,68 @@
+{
+  "Character": [
+    {
+      "Name": "전사",
+      "Code": "1",
+      "\bAttackDamage": "0",
+      "Defense": "0",
+      "MagicalDefense": "0",
+      "Health": "25",
+      "Strength": "75",
+      "Vitality": "70",
+      "Intelligence": "50",
+      "Wisdom": "50",
+      "Talent": "60",
+      "Agility": "50",
+      "Luck": "50",
+      "EXP": "0"
+    },
+    {
+      "Name": "궁수",
+      "Code": "2",
+      "\bAttackDamage": "0",
+      "Defense": "0",
+      "MagicalDefense": "0",
+      "Health": "20",
+      "Strength": "50",
+      "Vitality": "50",
+      "Intelligence": "50",
+      "Wisdom": "75",
+      "Talent": "60",
+      "Agility": "70",
+      "Luck": "50",
+      "EXP": "0"
+    },
+    {
+      "Name": "마법사",
+      "Code": "3",
+      "\bAttackDamage": "0",
+      "Defense": "0",
+      "MagicalDefense": "0",
+      "Health": "15",
+      "Strength": "50",
+      "Vitality": "50",
+      "Intelligence": "75",
+      "Wisdom": "70",
+      "Talent": "60",
+      "Agility": "50",
+      "Luck": "50",
+      "EXP": "0"
+    },
+    {
+      "Name": "탱커",
+      "Code": "4",
+      "\bAttackDamage": "0",
+      "Defense": "0",
+      "MagicalDefense": "0",
+      "Health": "40",
+      "Strength": "70",
+      "Vitality": "75",
+      "Intelligence": "50",
+      "Wisdom": "50",
+      "Talent": "60",
+      "Agility": "50",
+      "Luck": "50",
+      "EXP": "0"
+    }
+  ]
+}

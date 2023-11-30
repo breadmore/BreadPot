@@ -42,8 +42,7 @@ public class MoveController : MonoBehaviour
 
                 Node[,] grid = TilemapToNodeGrid(tilemap);
 
-                TileBase clickedTile = tilemap.GetTile(goalPlayerPosition);
-                Debug.Log($"Clicked Tile: {clickedTile}");
+                //TileBase clickedTile = tilemap.GetTile(goalPlayerPosition);
 
 
                 currentPath = AStar.FindPath(grid, startCellPosition, goalCellPosition);
@@ -65,9 +64,20 @@ public class MoveController : MonoBehaviour
         // 경로 인덱스를 전부 탐색했거나 이동가능 횟수를 다 쓸떄까지 반복
         while (currentPathIndex < currentPath.Count && GameManager.instance.canMoveCount>=0)
         {
+
             Vector2Int targetGridPosition = currentPath[currentPathIndex];
 
             Vector3 targetPosition = tilemap.GetCellCenterWorld(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0));
+
+            // 방향에 따라 캐릭터 전환
+            if (targetPosition.x > nowTurnPlayer.transform.position.x)
+            {
+                FlipCharacter(false); // 오른쪽으로 이동할 때는 Flip하지 않음
+            }
+            else
+            {
+                FlipCharacter(true); // 왼쪽으로 이동할 때 Flip
+            }
 
             while (Vector2.Distance(nowTurnPlayer.transform.position, targetPosition) > 0.1f)
             {
@@ -77,6 +87,7 @@ public class MoveController : MonoBehaviour
 
             GameManager.instance.canMoveCount--;
             currentPathIndex++;
+            GameManager.instance.CheckCollision();
             yield return null;
         }
 
@@ -132,8 +143,8 @@ public class MoveController : MonoBehaviour
     void FlipCharacter(bool isFacingLeft)
     {
         // 캐릭터의 스케일을 반전
-        Vector2 scale = transform.localScale;
+        Vector2 scale = nowTurnPlayer.transform.localScale;
         scale.x = isFacingLeft ? 1 : -1;
-        transform.localScale = scale;
+        nowTurnPlayer.transform.localScale = scale;
     }
 }

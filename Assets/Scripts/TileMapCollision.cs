@@ -11,11 +11,13 @@ public class TileMapCollision : MonoBehaviour
     private Collider2D playerCollider;
     private void Start()
     {
-        playerCollider = player.GetComponent<Collider2D>();
         
     }
     public void CheckCollision()
     {
+        player = CharacterManager.instance.players[GameManager.instance.currentPlayerIndex];
+        playerCollider = player.GetComponent<Collider2D>();
+
         // 타일맵 상에서 플레이어와 "Enemy" 태그를 가진 오브젝트가 동시에 충돌하는지 확인
         Bounds playerBounds = playerCollider.bounds;
         Vector2 playerPosition = playerBounds.center;

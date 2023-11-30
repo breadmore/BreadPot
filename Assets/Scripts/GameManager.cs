@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using TMPro;
 public class GameManager : Singleton<GameManager>
 {
@@ -11,17 +12,17 @@ public class GameManager : Singleton<GameManager>
 
     public EnemyManager enemyManager;
     private TileMapCollision tileMapCollision;
-    private int currentPlayerIndex; // 현재 플레이어 인덱스
+    public int currentPlayerIndex; // 현재 플레이어 인덱스
 
     public int canMoveCount;
     // Start is called before the first frame update
     void Start()
     {
+        
         currentPlayerIndex = -1;
         timeLine = 0;
         tileMapCollision = transform.GetComponent<TileMapCollision>();
         NextTurn();
-        
     }
 
     // Update is called once per frame
@@ -37,8 +38,6 @@ public class GameManager : Singleton<GameManager>
 
     public void NextTurn()
     {
-        print("next turn");
-
         // 다음 플레이어 
         currentPlayerIndex = (++currentPlayerIndex) % 4;
         // 턴 이동
@@ -58,7 +57,6 @@ public class GameManager : Singleton<GameManager>
         //
         if (timeLine % Consts.REFRESH_MAP_TIME == 0)
         {
-            print("Refresh");
             EnemyManager.instance.SpawnEnemy();
         }
     }
