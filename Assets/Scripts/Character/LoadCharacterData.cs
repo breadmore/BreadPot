@@ -3,25 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Character
-{
-    public string Name;
-    public string Code;
-    public int AttackDamage;
-    public int Defense;
-    public int MagicalDefense;
-    public int Health;
-    public int Strength;
-    public int Vitality;
-    public int Intelligence;
-    public int Wisdom;
-    public int Talent;
-    public int Agility;
-    public int Luck;
-    public int EXP;
-}
-
-[System.Serializable]
 public class CharacterDataWrapper
 {
     public List<Character> Character;
@@ -73,6 +54,18 @@ public class LoadCharacterData : MonoBehaviour
         {
             Debug.LogError($"Character with code {code} not found!");
             return null;
+        }
+    }
+
+    void DisplayCharacterData(string code)
+    {
+        Character characterData = GetCharacterDataWithCode(code);
+
+        if (characterData != null)
+        {
+            Debug.Log($"Character Code: {characterData.Code}");
+            Debug.Log($"Character Name: {characterData.Name}");
+            // 추가적인 데이터 출력 로직 추가
         }
     }
 }

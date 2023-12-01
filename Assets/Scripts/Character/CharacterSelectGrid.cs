@@ -63,7 +63,9 @@ public class CharacterSelectGrid : MonoBehaviour
             characterSelectGridParent.isCharacterSelect[currentIndex] = true;
             UpdateInteractability();
             UpdateReadyImage();
-        }else if(characterSelectGridParent.isCharacterSelect[currentIndex] &&
+            SaveData("Character" + (gridIndex+1).ToString(), CharacterPool.instance.characterPresets[currentIndex].Code);
+        }
+        else if(characterSelectGridParent.isCharacterSelect[currentIndex] &&
             characterSelectGridParent.isGridReady[gridIndex])
         {
             characterSelectGridParent.ToggleSelectGrids(gridIndex);
@@ -77,13 +79,12 @@ public class CharacterSelectGrid : MonoBehaviour
     }
     private void ShowCharacterData()
     {
-        if (CharacterPool.instance.characters != null)
+        if (CharacterPool.instance.characterPresets != null)
         {
             if (characterPreset != null)
             {
                 Destroy(characterPreset);
             }
-            Character selectCharacter = CharacterPool.instance.characters[currentIndex];
             characterPreset = Instantiate(CharacterPool.instance.characterPresets[currentIndex].CharacterPrefab,
                characterPosition.position, Quaternion.identity, GameObject.Find("Canvas").transform.parent);
 
@@ -110,5 +111,9 @@ public class CharacterSelectGrid : MonoBehaviour
         }
     }
 
-
+    void SaveData(string key, string value)
+    {
+        PlayerPrefs.SetString(key, value);
+        PlayerPrefs.Save();
+    }
 }

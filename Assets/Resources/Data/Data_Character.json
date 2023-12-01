@@ -14,7 +14,8 @@
       "Talent": "60",
       "Agility": "50",
       "Luck": "50",
-      "EXP": "0"
+      "EXP": "0",
+      "SkillCode": "1"
     },
     {
       "Name": "궁수",
@@ -30,7 +31,8 @@
       "Talent": "60",
       "Agility": "70",
       "Luck": "50",
-      "EXP": "0"
+      "EXP": "0",
+      "SkillCode": "2"
     },
     {
       "Name": "마법사",
@@ -46,7 +48,8 @@
       "Talent": "60",
       "Agility": "50",
       "Luck": "50",
-      "EXP": "0"
+      "EXP": "0",
+      "SkillCode": "3"
     },
     {
       "Name": "탱커",
@@ -62,7 +65,8 @@
       "Talent": "60",
       "Agility": "50",
       "Luck": "50",
-      "EXP": "0"
+      "EXP": "0",
+      "SkillCode": "4"
     }
   ]
 }

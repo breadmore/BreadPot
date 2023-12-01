@@ -17,7 +17,7 @@ public class CharacterSelectGridParent : MonoBehaviour
     {
         startButton.onClick.AddListener(StartButton);
         isGridReady = new bool[Consts.MAX_NUMBER_PARTY];
-        isCharacterSelect = new bool[CharacterPool.instance.characters.Count];
+        isCharacterSelect = new bool[CharacterPool.instance.characterPresets.Count];
         for (int i=0; i<Consts.MAX_NUMBER_PARTY; i++)
         {
             isGridReady[i] = false;
@@ -53,21 +53,9 @@ public class CharacterSelectGridParent : MonoBehaviour
     
     public void StartButton()
     {
-        int index = 0;
-        for(int i=0; i<isCharacterSelect.Length; i++)
-        {
-            if (isCharacterSelect[i])
-            {
-                index++;
-                SaveData("Character" + index.ToString(), (i+1).ToString());
-            }
-        }
+        
         LoadSceneManager.instance.LoadScene("Game");
     }
 
-    void SaveData(string key, string value)
-    {
-        PlayerPrefs.SetString(key, value);
-        PlayerPrefs.Save();
-    }
+
 }

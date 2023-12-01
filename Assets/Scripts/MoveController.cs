@@ -86,6 +86,10 @@ public class MoveController : MonoBehaviour
             }
 
             GameManager.instance.canMoveCount--;
+            PlayerDataManager.instance.playerInventories[GameManager.instance.currentPlayerIndex].playerPosition = currentPath[currentPathIndex];
+            print(GameManager.instance.currentPlayerIndex);
+            print(currentPathIndex);
+
             currentPathIndex++;
             GameManager.instance.CheckCollision();
             yield return null;
