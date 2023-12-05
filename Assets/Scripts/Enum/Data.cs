@@ -4,6 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class GearData
+{
+    public string Code;
+    public string WeaponLeft;
+    public string WeaponRight;
+    public string Helmat;
+    public string Armor;
+    public string Foot;
+}
+
+
+[System.Serializable]
 public class Character
 {
     public string Name;
@@ -31,11 +43,9 @@ public class PlayerInventory
     public Vector2Int playerPosition;
     public string leftHandEquipmentCode;
     public string rightHandEquipmentCode;
-    public string hatEquipmentCode;
-    public string chestplateEquipmentCode;
-    public string shoesEquipmentCode;
-    public string ringEquipmentCode;
-    public string necklaceEquipmentCode;
+    public string helmatEquipmentCode;
+    public string armorEquipmentCode;
+    public string footEquipmentCode;
     public int gold;
     public string[] inventory = new string[5];
 
@@ -45,11 +55,9 @@ public class PlayerInventory
         playerPosition = Vector2Int.zero;
         leftHandEquipmentCode = "";
         rightHandEquipmentCode = "";
-        hatEquipmentCode = "";
-        chestplateEquipmentCode = "";
-        shoesEquipmentCode = "";
-        ringEquipmentCode = "";
-        necklaceEquipmentCode = "";
+        helmatEquipmentCode = "";
+        armorEquipmentCode = "";
+        footEquipmentCode = "";
         gold = 0;
         for (int i = 0; i < inventory.Length; i++)
         {

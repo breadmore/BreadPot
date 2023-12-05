@@ -1,0 +1,36 @@
+{
+  "Gear": [
+    {
+      "Code": "1",
+      "WeaponLeft": "1",
+      "WeaponRight": "0",
+      "Helmat": "0",
+      "Armor": "0",
+      "Foot": "0"
+    },
+    {
+      "Code": "2",
+      "WeaponLeft": "6",
+      "WeaponRight": "12",
+      "Helmat": "0",
+      "Armor": "0",
+      "Foot": "0"
+    },
+    {
+      "Code": "3",
+      "WeaponLeft": "10",
+      "WeaponRight": "0",
+      "Helmat": "0",
+      "Armor": "0",
+      "Foot": "0"
+    },
+    {
+      "Code": "4",
+      "WeaponLeft": "11",
+      "WeaponRight": "0",
+      "Helmat": "0",
+      "Armor": "0",
+      "Foot": "0"
+    }
+  ]
+}

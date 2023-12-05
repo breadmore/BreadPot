@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerDataManager : SingletonDontDestroy<PlayerDataManager>
 {
-    public LoadCharacterData loadCharacterData;
     public List<Character> characterAttributes = new List<Character>();
     public List<PlayerInventory> playerInventories = new List<PlayerInventory>();
 
@@ -16,14 +15,27 @@ public class PlayerDataManager : SingletonDontDestroy<PlayerDataManager>
         for (int i = 0; i < Consts.MAX_NUMBER_PARTY; i++)
         {
             Character newCharacterAttributes = new Character();
-            PlayerInventory newPlayerInventory = new PlayerInventory();
+            PlayerInventory newPlayerInventory = LoadPlayerInventory(PlayerPrefs.GetString("Character" + (i + 1).ToString()));
             characterAttributes.Add(newCharacterAttributes);
             playerInventories.Add(newPlayerInventory);
-            characterAttributes[i] = loadCharacterData.GetCharacterDataWithCode(PlayerPrefs.GetString("Character" + (i + 1).ToString()));
+            characterAttributes[i] = LoadCharacterData.instance.GetCharacterDataWithCode(PlayerPrefs.GetString("Character" + (i + 1).ToString()));
+            
         }
         PlayerGridParent.instance.RefreshPlayerGrid();
     }
 
+    public PlayerInventory LoadPlayerInventory(string code)
+    {
+        PlayerInventory playerInventory = new PlayerInventory();
+        GearData gearData = LoadCharacterGear.instance.GetGearDataWithCode(code);
+
+        playerInventory.leftHandEquipmentCode = gearData.WeaponLeft;
+        playerInventory.rightHandEquipmentCode = gearData.WeaponRight;
+        playerInventory.helmatEquipmentCode = gearData.Helmat;
+        playerInventory.armorEquipmentCode = gearData.Armor;
+        playerInventory.footEquipmentCode = gearData.Foot;
+        return playerInventory;
+    }
     // 특정 플레이어 데이터 불러오기
     public PlayerInventory GetPlayerInventory(int playerIndex)
     {
@@ -51,14 +63,7 @@ public class PlayerDataManager : SingletonDontDestroy<PlayerDataManager>
 
     private void Start()
     {
-        if (loadCharacterData == null)
-        {
-            Debug.LogError("LoadCharacterData not found!");
-            return;
-        }
-        else
-        {
-            CreatePlayers();
-        }
+
+        CreatePlayers();
     }
 }

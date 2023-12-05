@@ -8,9 +8,9 @@ public class CharacterDataWrapper
     public List<Character> Character;
 }
 
-public class LoadCharacterData : MonoBehaviour
+public class LoadCharacterData : Singleton<LoadCharacterData>
 {
-    public TextAsset jsonFile; // Drag and drop your JSON file in the Unity Editor.
+    public TextAsset jsonFile;
     private Dictionary<string, Character> characterDictionary;
 
     void Start()
@@ -21,7 +21,7 @@ public class LoadCharacterData : MonoBehaviour
         }
         else
         {
-            Debug.LogError("JSON file not assigned!");
+            Debug.LogError("JSON 파일 읽기 실패");
         }
     }
 
@@ -40,7 +40,7 @@ public class LoadCharacterData : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to parse JSON data or no characters found!");
+            Debug.LogError("데이터 불러오기 실패");
         }
     }
 
@@ -52,20 +52,8 @@ public class LoadCharacterData : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Character with code {code} not found!");
+            Debug.LogError($"캐릭터 코드 {code} 찾을수 없음");
             return null;
-        }
-    }
-
-    void DisplayCharacterData(string code)
-    {
-        Character characterData = GetCharacterDataWithCode(code);
-
-        if (characterData != null)
-        {
-            Debug.Log($"Character Code: {characterData.Code}");
-            Debug.Log($"Character Name: {characterData.Name}");
-            // 추가적인 데이터 출력 로직 추가
         }
     }
 }

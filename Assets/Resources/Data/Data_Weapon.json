@@ -1,0 +1,88 @@
+{
+  "Weapon": [
+    {
+      "Type": "Weapon",
+      "Code": "1",
+      "Hand": "0",
+      "AttackDamage": "6",
+      "SkillCode": "1"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "2",
+      "Hand": "0",
+      "AttackDamage": "8",
+      "SkillCode": "2"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "3",
+      "Hand": "0",
+      "AttackDamage": "10",
+      "SkillCode": "3"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "4",
+      "Hand": "2",
+      "AttackDamage": "20",
+      "SkillCode": "4"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "5",
+      "Hand": "0",
+      "AttackDamage": "15",
+      "SkillCode": "5"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "6",
+      "Hand": "0",
+      "AttackDamage": "10",
+      "SkillCode": "6"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "7",
+      "Hand": "0",
+      "AttackDamage": "12",
+      "SkillCode": "7"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "8",
+      "Hand": "2",
+      "AttackDamage": "25",
+      "SkillCode": "8"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "9",
+      "Hand": "2",
+      "AttackDamage": "18",
+      "SkillCode": "9"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "10",
+      "Hand": "2",
+      "AttackDamage": "10",
+      "SkillCode": "10"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "11",
+      "Hand": "2",
+      "AttackDamage": "14",
+      "SkillCode": "11"
+    },
+    {
+      "Type": "Weapon",
+      "Code": "12",
+      "Hand": "1",
+      "AttackDamage": "0",
+      "SkillCode": "12"
+    }
+  ]
+}

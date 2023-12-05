@@ -5028,13 +5028,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPresets:
-  - CharacterPrefab: {fileID: 5754294684141132134, guid: 1a45b617a24b74224ad8b68b4b38a579, type: 3}
+  - CharacterPrefab: {fileID: 5754294684141132134, guid: 24e66cfd91a354d0997fd70f21d5bc28, type: 3}
     Code: 1
-  - CharacterPrefab: {fileID: 3036008956063895606, guid: 68e919350b3e64e359d0756bdce9884f, type: 3}
+  - CharacterPrefab: {fileID: 7466498225521596106, guid: 5c2d00ed1c5a74469a256182156a1c48, type: 3}
     Code: 2
-  - CharacterPrefab: {fileID: 882711536142671072, guid: 275256f5eee014e39b0f4b04bee507cf, type: 3}
+  - CharacterPrefab: {fileID: 3036008956063895606, guid: ba86cc3e6e48945b29aea5d8dc30a850, type: 3}
     Code: 3
-  - CharacterPrefab: {fileID: 7466498225521596106, guid: 66a2201b231a44d4790a7fb917ba14b5, type: 3}
+  - CharacterPrefab: {fileID: 882711536142671072, guid: 58193846071474a0185f90070fa6dacd, type: 3}
     Code: 4
 --- !u!1 &1260284218
 GameObject:
