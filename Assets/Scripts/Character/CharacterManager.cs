@@ -60,16 +60,6 @@ public class CharacterManager : Singleton<CharacterManager>
         moveController.nowTurnPlayer = players[currentPlayerIndex];
     }
 
-    public void StartBattleScene()
-    {
-        foreach (GameObject player in players)
-        {
-            player.transform.position = new Vector2(-10f, 0);
-            Vector2 scale = player.transform.localScale;
-            scale.x = -1;
-        }
-    }
-
     string LoadData(string key)
     {
         return PlayerPrefs.GetString(key, "");

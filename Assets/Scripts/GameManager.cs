@@ -50,6 +50,8 @@ public class GameManager : Singleton<GameManager>
 
         canMoveCount = 0;
         MovementUI.instance.DeterminationMovement();
+
+        PlayerInfo.instance.RefreshPlayerInfo(currentPlayerIndex);
     }
 
     public void RefreshMap()

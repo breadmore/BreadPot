@@ -21,7 +21,7 @@ public class PlayerDataManager : SingletonDontDestroy<PlayerDataManager>
             playerInventories.Add(newPlayerInventory);
             characterAttributes[i] = loadCharacterData.GetCharacterDataWithCode(PlayerPrefs.GetString("Character" + (i + 1).ToString()));
         }
-
+        PlayerGridParent.instance.RefreshPlayerGrid();
     }
 
     // 특정 플레이어 데이터 불러오기
@@ -46,7 +46,8 @@ public class PlayerDataManager : SingletonDontDestroy<PlayerDataManager>
         }
 
         playerInventories[playerIndex] = playerInventory;
-    }
+        // 저장 로직 여기에 넣을 생각입니다
+        }
 
     private void Start()
     {

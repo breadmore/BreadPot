@@ -91,6 +91,7 @@ public class MoveController : MonoBehaviour
             print(currentPathIndex);
 
             currentPathIndex++;
+            
             GameManager.instance.CheckCollision();
             yield return null;
         }

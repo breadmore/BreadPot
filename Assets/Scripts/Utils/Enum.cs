@@ -7,6 +7,17 @@ public enum Test
     None
 }
 
+public enum AttackRange
+{
+    Short,
+    Long
+}
+
+public enum ObjectType
+{
+    Player,
+    Enemy
+}
 
 public static class Consts
 {

@@ -9,17 +9,27 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnTime = GameManager.instance.ReturnTimeLine();
+        if (gameObject.scene.name == "Game")
+        {
+            spawnTime = GameManager.instance.ReturnTimeLine();
+        }
+        else
+        {
+            enabled = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTimeLine = GameManager.instance.ReturnTimeLine();   
-    
-        if(spawnTime+Consts.DELETE_ENEMY_TIME == currentTimeLine)
+        if (gameObject.activeSelf && enabled)
         {
-            Destroy(gameObject);
+            currentTimeLine = GameManager.instance.ReturnTimeLine();
+
+            if (spawnTime + Consts.DELETE_ENEMY_TIME == currentTimeLine)
+            {
+                Destroy(gameObject); // Deactivate the object
+            }
         }
     }
 }

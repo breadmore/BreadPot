@@ -11,6 +11,7 @@ public class Character
     public int AttackDamage;
     public int Defense;
     public int MagicalDefense;
+    public int Evasion;
     public int Health;
     public int Strength;
     public int Vitality;
@@ -35,7 +36,7 @@ public class PlayerInventory
     public string shoesEquipmentCode;
     public string ringEquipmentCode;
     public string necklaceEquipmentCode;
-    public int money;
+    public int gold;
     public string[] inventory = new string[5];
 
     public PlayerInventory()
@@ -49,7 +50,7 @@ public class PlayerInventory
         shoesEquipmentCode = "";
         ringEquipmentCode = "";
         necklaceEquipmentCode = "";
-        money = 0;
+        gold = 0;
         for (int i = 0; i < inventory.Length; i++)
         {
             inventory[i] = "";

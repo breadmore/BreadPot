@@ -5027,17 +5027,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87f077a2c3e642eb919996616572dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadCharacterData: {fileID: 1254860247}
-  characterInfoText: {fileID: 0}
-  characters: []
   characterPresets:
-  - CharacterPrefab: {fileID: 4583183147814052386, guid: 4448992fe7de14f81bf9dd4f6cae58a8, type: 3}
+  - CharacterPrefab: {fileID: 5754294684141132134, guid: 1a45b617a24b74224ad8b68b4b38a579, type: 3}
     Code: 1
-  - CharacterPrefab: {fileID: 4738567226395222010, guid: 7ce1033b705f34bb88c1bdf1af8cea71, type: 3}
+  - CharacterPrefab: {fileID: 3036008956063895606, guid: 68e919350b3e64e359d0756bdce9884f, type: 3}
     Code: 2
-  - CharacterPrefab: {fileID: 2347037992782013880, guid: 060a4ef0732364793b951ad0cddc6d32, type: 3}
+  - CharacterPrefab: {fileID: 882711536142671072, guid: 275256f5eee014e39b0f4b04bee507cf, type: 3}
     Code: 3
-  - CharacterPrefab: {fileID: 5627015469634807710, guid: 166db81e3d63540ff9dae1d7faad5a81, type: 3}
+  - CharacterPrefab: {fileID: 7466498225521596106, guid: 66a2201b231a44d4790a7fb917ba14b5, type: 3}
     Code: 4
 --- !u!1 &1260284218
 GameObject:
